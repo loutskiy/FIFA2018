@@ -8,22 +8,73 @@
 
 import UIKit
 import RealmSwift
+import ObjectMapper
+import Alamofire
+import CoreLocation
 
-class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
+    let locationManager = CLLocationManager()
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextField: UITextField!
     let multipeerService = MultipeerManager()
     var messages: Results<MessageModel>?
     @IBOutlet weak var segmentControl: UISegmentedControl!
-    
+    @IBOutlet weak var sentButton: UIButton!
+    var matches = [MatchModel]()
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         multipeerService.delegate = self
         messages = realm.objects(MessageModel.self)
+        sentButton.layer.cornerRadius = 28.5
+        self.locationManager.requestAlwaysAuthorization()
         
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+            loadData()
+        }
+        loadData()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        loadData()
+        //print("locations = \(locValue.latitude) \(locValue.longitude)")
+    }
+    
+    
+    func loadData () {
+        let params:Parameters = ["latitude": locationManager.location?.coordinate.latitude ?? 0, "longitude": locationManager.location?.coordinate.longitude ?? 0]
+        Alamofire.request(URL(string:"https://fifa.bigbadbird.ru/api/getMatch")!, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                //print(params)
+                if let JSON = response.result.value as? [String:AnyObject] {
+                    let errorCode = JSON["errorCode"] as! Int
+                    if errorCode == 0 {
+                        self.matches = Mapper<MatchModel>().mapArray(JSONObject: JSON["result"])!
+                        self.segmentControl.removeAllSegments()
+                        self.segmentControl.insertSegment(withTitle: "Все", at: 0, animated: true)
+                        self.segmentControl.insertSegment(withTitle: self.matches[0].Name, at: 1, animated: true)
+                        self.segmentControl.insertSegment(withTitle: self.matches[1].Name, at: 2, animated: true)
+                        self.segmentControl.selectedSegmentIndex = 0
+                    } else {
+                        self.showAlertMessage(text: "Чемпионат не найдет", title: "Ошибка")
+                    }
+                }
+            case .failure(let error):
+                print("Error \(error)")
+                //fail(error as NSError)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

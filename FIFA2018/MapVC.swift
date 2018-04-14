@@ -11,12 +11,14 @@ import NMAKit
 import Alamofire
 import ObjectMapper
 
-class MapVC: UIViewController, CLLocationManagerDelegate {
+
+class MapVC: UIViewController, CLLocationManagerDelegate, NMARouteManagerDelegate {
     
     let locationManager = CLLocationManager()
 
     @IBOutlet weak var goToHome: UIButton!
     @IBOutlet weak var mapView: NMAMapView!
+    var clusters = [ClusterModel]()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.locationManager.requestAlwaysAuthorization()
@@ -42,26 +44,27 @@ class MapVC: UIViewController, CLLocationManagerDelegate {
             NotificationCenter.default.addObserver(self, selector: #selector(positionDidUpdate), name: .NMAPositioningManagerDidUpdatePosition, object: NMAPositioningManager.shared())
             
         }
-
-        Alamofire.request(URL(string:"https://fifa.bigbadbird.ru/api/getAllPoints")!, method: .post).responseJSON { (response) in
+        
+        loadData()
+    }
+    
+    @objc func loadData () {
+        let params:Parameters = ["latitude": locationManager.location?.coordinate.latitude ?? 0, "longitude": locationManager.location?.coordinate.longitude ?? 0]
+        Alamofire.request(URL(string:"https://fifa.bigbadbird.ru/api/getClusters")!, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { (response) in
             switch response.result {
             case .success:
+                //print(params)
                 if let JSON = response.result.value as? [String:AnyObject] {
-//                    print(response.response)
-//                    print(response.request)
-//                    print(response.result.value)
-                    let data = Mapper<GeoLocation>().mapArray(JSONObject: JSON["result"])
-                    for geo in data! {
-//                        let marker = NMAMapMarker.init(geoCoordinates: NMAGeoCoordinates.init(latitude: geo.Latitude, longitude: geo.Longitude))
-//                        marker.title = "te"
-//                        marker.icon = #imageLiteral(resourceName: "Pin")
-//                        self.mapView.add(marker)
-                        
-                        let circle = NMAMapCircle.init(coordinates: NMAGeoCoordinates.init(latitude: geo.Latitude, longitude: geo.Longitude), radius: 20)
-                        
-                        circle.fillColor = .red
-                        self.mapView.add(circle)
-                        
+                    let errorCode = JSON["errorCode"] as! Int
+                    if errorCode == 0 {
+                        self.clusters = Mapper<ClusterModel>().mapArray(JSONObject: JSON["result"])!
+                        for cluster in self.clusters {
+                            let circle = NMAMapCircle.init(coordinates: NMAGeoCoordinates.init(latitude: cluster.Latitude, longitude: cluster.Longitude), radius: Double(cluster.Count))
+                            circle.fillColor = UIColor.init(red: 1, green: 0, blue: 0, alpha: CGFloat(cluster.Alpha))
+                            self.mapView.add(circle)
+                        }
+                    } else {
+                        self.showAlertMessage(text: "Чемпионат не найдет", title: "Ошибка")
                     }
                 }
             case .failure(let error):
@@ -69,8 +72,6 @@ class MapVC: UIViewController, CLLocationManagerDelegate {
                 //fail(error as NSError)
             }
         }
-    
-        // Do any additional setup after loading the view.
     }
 
     @objc func positionDidUpdate () {
@@ -94,11 +95,25 @@ class MapVC: UIViewController, CLLocationManagerDelegate {
     }
     
     @IBAction func goToHomeAction(_ sender: Any) {
-        //let params: Parameters = ["latitude"]
-        Alamofire.request(URL(string:"https://fifa.bigbadbird.ru/api/")!, method: .post).responseJSON { (response) in
+        let params:Parameters = ["latitude": locationManager.location?.coordinate.latitude ?? 0, "longitude": locationManager.location?.coordinate.longitude ?? 0]
+        Alamofire.request(URL(string:"https://fifa.bigbadbird.ru/api/getWay")!, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { (response) in
             switch response.result {
             case .success:
                 if let JSON = response.result.value as? [String:AnyObject] {
+                    let data = Mapper<MetroModel>().map(JSONObject: JSON["result"])
+                    let routeManager = NMARouteManager.shared()
+                    routeManager.delegate = self
+                    var stops = [NMAGeoCoordinates]()
+                    let geoCoord1 = NMAPositioningManager.shared().currentPosition?.coordinates
+                    let geoCoord2 = NMAGeoCoordinates(latitude: (data?.Latitude)!, longitude: (data?.Longitude)!)
+                    stops.append(geoCoord1!)
+                    stops.append(geoCoord2)
+                    print(stops)
+                    let routingMode = NMARoutingMode.init(routingType: .fastest, transportMode: .pedestrian, routingOptions: 0)
+                    routeManager.calculateRoute(stops: stops, mode: routingMode!)
+                    
+                    
+                    
 //                    //                    print(response.response)
 //                    //                    print(response.request)
 //                    //                    print(response.result.value)
@@ -117,4 +132,18 @@ class MapVC: UIViewController, CLLocationManagerDelegate {
         }
     }
 
+    func routeManagerDidCalculate(_ routeManager: NMARouteManager, routes: [NMARoute]?, error: NMARouteManagerError, violatedOptions: [NSNumber]?) {
+        print(error.rawValue)
+        //if error == nil && routes != nil && (routes?.count)! > 0 {
+        OperationQueue.main.addOperation {
+            
+            let route = routes![0]
+            let mapRoute = NMAMapRoute.init(route: route)
+            self.mapView.add(mapRoute)
+        }
+//        } else if error != nil {
+//
+//        }
+    }
+    
 }

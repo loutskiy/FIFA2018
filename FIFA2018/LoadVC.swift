@@ -24,7 +24,11 @@ class LoadVC: UIViewController {
             present(vc!, animated: true, completion: nil)
         } else {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "PickerVC") as! PickerVC
-            present(vc, animated: true, completion: nil)
+            let nav = UINavigationController.init(rootViewController: vc)
+            nav.navigationBar.backgroundColor = .red
+            nav.navigationBar.barStyle = .blackTranslucent
+            vc.title = "Добро пожаловать"
+            present(nav, animated: true, completion: nil)
         }
     }
 

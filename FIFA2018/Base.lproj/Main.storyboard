@@ -120,9 +120,10 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CSj-hz-nJl" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="S.O.S" image="sos" id="Gr9-mA-lYa"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="430-hL-HRs">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="430-hL-HRs">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.81467633930000005" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -230,9 +231,10 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aQ0-Uu-eDa" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Карта" image="placeholder" id="jzY-l3-T9b"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="o8J-kl-8EU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="o8J-kl-8EU">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.81467633930000005" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -287,9 +289,10 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="afF-O4-USK" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Hashchat" image="icon" id="DfG-0U-laV"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6GM-CI-fed">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="6GM-CI-fed">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.81467633930000005" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -317,20 +320,19 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Введите текст" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GbR-ra-MIP">
-                                            <rect key="frame" x="8" y="0.0" width="251" height="73"/>
+                                            <rect key="frame" x="8" y="0.0" width="294" height="73"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ruD-d7-bQd">
-                                            <rect key="frame" x="267" y="0.0" width="100" height="73"/>
-                                            <color key="backgroundColor" red="0.81467633930000005" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ruD-d7-bQd">
+                                            <rect key="frame" x="310" y="8" width="57" height="57"/>
+                                            <color key="backgroundColor" red="0.0" green="0.62656250000000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="73" id="J2G-an-NOH"/>
-                                                <constraint firstAttribute="width" constant="100" id="pOL-83-bBg"/>
+                                                <constraint firstAttribute="height" constant="57" id="J2G-an-NOH"/>
+                                                <constraint firstAttribute="width" constant="57" id="pOL-83-bBg"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                            <state key="normal" title="Отправить">
+                                            <state key="normal" image="sent-mail">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
@@ -348,6 +350,11 @@
                                         <constraint firstItem="ruD-d7-bQd" firstAttribute="leading" secondItem="GbR-ra-MIP" secondAttribute="trailing" constant="8" id="mJB-eO-qAb"/>
                                         <constraint firstItem="ruD-d7-bQd" firstAttribute="centerY" secondItem="z82-7g-p7f" secondAttribute="centerY" id="oNe-pO-OuO"/>
                                     </constraints>
+                                </view>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="EMq-Me-5Bo">
+                                    <rect key="frame" x="0.0" y="161" width="375" height="1"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="60" id="Upd-E1-tgQ" customClass="ChatCell" customModule="FIFA2018" customModuleProvider="target">
@@ -408,6 +415,7 @@
                     <connections>
                         <outlet property="messageTextField" destination="GbR-ra-MIP" id="Hqp-mH-UUN"/>
                         <outlet property="segmentControl" destination="ZBG-bi-TeA" id="3cG-XE-vAF"/>
+                        <outlet property="sentButton" destination="ruD-d7-bQd" id="BQp-if-tS8"/>
                         <outlet property="tableView" destination="T5u-gS-nae" id="FTc-Af-Tlw"/>
                     </connections>
                 </viewController>
@@ -423,37 +431,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xWi-G6-JNc">
-                                <rect key="frame" x="0.0" y="122" width="375" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xWi-G6-JNc">
+                                <rect key="frame" x="16" y="253" width="343" height="160"/>
+                                <color key="backgroundColor" red="0.47505580357142857" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="S3S-RB-ADX"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Qo1-oa-9iq">
-                                    <size key="itemSize" width="154" height="129"/>
+                                    <size key="itemSize" width="154" height="136"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="3WE-2m-XF9" customClass="CountryCell" customModule="FIFA2018" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="154" height="129"/>
+                                        <rect key="frame" x="10" y="10" width="154" height="136"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="154" height="129"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="154" height="136"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="84i-0c-28D">
-                                                    <rect key="frame" x="0.0" y="1" width="154" height="99"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3FT-d2-kdk">
-                                                    <rect key="frame" x="0.0" y="108" width="154" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3FT-d2-kdk">
+                                                    <rect key="frame" x="0.0" y="107" width="154" height="29"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="29" id="RBf-3U-iUX"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="84i-0c-28D">
+                                                    <rect key="frame" x="28" y="0.0" width="99" height="99"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="99" id="4n0-1i-Hfz"/>
+                                                        <constraint firstAttribute="height" constant="99" id="eI1-Ug-6Hn"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="84i-0c-28D" firstAttribute="top" secondItem="3WE-2m-XF9" secondAttribute="top" id="BVj-ev-idt"/>
+                                            <constraint firstAttribute="trailing" secondItem="3FT-d2-kdk" secondAttribute="trailing" id="KBx-2f-qv3"/>
+                                            <constraint firstAttribute="bottom" secondItem="3FT-d2-kdk" secondAttribute="bottom" id="TBA-DM-TfV"/>
+                                            <constraint firstItem="84i-0c-28D" firstAttribute="centerX" secondItem="3WE-2m-XF9" secondAttribute="centerX" id="fjG-1r-egF"/>
+                                            <constraint firstItem="3FT-d2-kdk" firstAttribute="leading" secondItem="3WE-2m-XF9" secondAttribute="leading" id="ohA-q9-U2P"/>
+                                            <constraint firstItem="3FT-d2-kdk" firstAttribute="top" secondItem="84i-0c-28D" secondAttribute="bottom" constant="8" id="pCO-p9-Mql"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="countryName" destination="3FT-d2-kdk" id="W12-z2-X7n"/>
                                             <outlet property="imgaeView" destination="84i-0c-28D" id="1XU-nD-HGZ"/>
@@ -461,8 +484,34 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Чемпионат мира" translatesAutoresizingMaskIntoConstraints="NO" id="NFp-MQ-3xq">
+                                <rect key="frame" x="16" y="92" width="343" height="76"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="76" id="z5h-wT-HbU"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выберите сборную:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddA-3t-FaS">
+                                <rect key="frame" x="16" y="176" width="343" height="69"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="69" id="bLo-IN-hkh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.81467633930000005" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="jQD-RL-kGh" firstAttribute="trailing" secondItem="NFp-MQ-3xq" secondAttribute="trailing" constant="16" id="BaQ-RG-XnM"/>
+                            <constraint firstItem="jQD-RL-kGh" firstAttribute="trailing" secondItem="xWi-G6-JNc" secondAttribute="trailing" constant="16" id="G8q-mx-w20"/>
+                            <constraint firstItem="xWi-G6-JNc" firstAttribute="top" secondItem="ddA-3t-FaS" secondAttribute="bottom" constant="8" id="Jln-4x-YMp"/>
+                            <constraint firstItem="xWi-G6-JNc" firstAttribute="leading" secondItem="jQD-RL-kGh" secondAttribute="leading" constant="16" id="PvD-XE-N1m"/>
+                            <constraint firstItem="NFp-MQ-3xq" firstAttribute="top" secondItem="jQD-RL-kGh" secondAttribute="top" constant="72" id="XBN-Nb-quM"/>
+                            <constraint firstItem="ddA-3t-FaS" firstAttribute="top" secondItem="NFp-MQ-3xq" secondAttribute="bottom" constant="8" id="ndg-yJ-xec"/>
+                            <constraint firstItem="ddA-3t-FaS" firstAttribute="leading" secondItem="jQD-RL-kGh" secondAttribute="leading" constant="16" id="vVD-QL-C7I"/>
+                            <constraint firstItem="jQD-RL-kGh" firstAttribute="trailing" secondItem="ddA-3t-FaS" secondAttribute="trailing" constant="16" id="wWp-NS-ztv"/>
+                            <constraint firstItem="NFp-MQ-3xq" firstAttribute="leading" secondItem="jQD-RL-kGh" secondAttribute="leading" constant="16" id="zEY-xJ-G4l"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="jQD-RL-kGh"/>
                     </view>
                     <connections>
@@ -497,6 +546,8 @@
         <image name="cursor" width="24" height="24"/>
         <image name="icon" width="20" height="23"/>
         <image name="placeholder" width="17" height="24"/>
+        <image name="sent-mail" width="28" height="26"/>
         <image name="sos" width="24" height="24"/>
+        <image name="Чемпионат мира" width="349" height="40"/>
     </resources>
 </document>
