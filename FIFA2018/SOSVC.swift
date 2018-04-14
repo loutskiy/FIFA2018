@@ -22,10 +22,12 @@ class SOSVC: UIViewController, CLLocationManagerDelegate, SelectSectorVCDelegate
     var capturePhotoOutput: AVCapturePhotoOutput?
     var qrCodeFrameView: UIView?
     var timer: Timer!
+    var sector = GeoLocation()
     
     @IBOutlet weak var sectorName: UILabel!
     
     @IBOutlet weak var cameraPreviewView: UIView!
+    @IBOutlet weak var sosButton: UIButton!
     
     @IBAction func takePhoto(_ sender: Any) {
         guard let capturePhotoOutput = self.capturePhotoOutput else { return }
@@ -50,6 +52,8 @@ class SOSVC: UIViewController, CLLocationManagerDelegate, SelectSectorVCDelegate
         
         // For use in foreground
         self.locationManager.requestWhenInUseAuthorization()
+        
+        sosButton.layer.cornerRadius = 25
         
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
@@ -134,6 +138,7 @@ class SOSVC: UIViewController, CLLocationManagerDelegate, SelectSectorVCDelegate
     
     func didFinishWithSelectedSector(geo: GeoLocation) {
         timer.invalidate()
+        sector = geo
         self.sectorName.text = "\(geo.SectorName) - \(geo.SectorNumber)"
     }
     
@@ -147,6 +152,7 @@ class SOSVC: UIViewController, CLLocationManagerDelegate, SelectSectorVCDelegate
                 if let JSON = response.result.value as? [String:AnyObject] {
                     let data = Mapper<GeoLocation>().map(JSONObject: JSON["result"])
                     self.sectorName.text = "\(data?.SectorName ?? "") - \(data?.SectorNumber ?? "")"
+                    self.sector = data!
                 }
             case .failure(let error):
                 print("Error \(error)")
@@ -193,7 +199,7 @@ extension SOSVC : AVCapturePhotoCaptureDelegate {
             let imageData:Data = UIImagePNGRepresentation(image)!
             let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
             
-            let params: Parameters = ["latitude": locationManager.location?.coordinate.latitude ?? 0, "longitude": locationManager.location?.coordinate.longitude ?? 0, "image": strBase64]
+            let params: Parameters = ["sector_id": sector.ID, "image": strBase64]
             //print(params)
             
             Alamofire.request(URL(string:"https://fifa.bigbadbird.ru/api/sendWarning")!, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { (response) in

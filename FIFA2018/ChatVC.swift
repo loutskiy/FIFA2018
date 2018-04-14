@@ -35,6 +35,15 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         messageTextField.resignFirstResponder()
         if messageTextField.text != "" {
             multipeerService.send(message: messageTextField.text!)
+            let message = MessageModel()
+            message.message = messageTextField.text!
+            message.time = Date()
+            message.countryId = UserCache.countryId()
+            //message.uuid = UserCache.uuid()
+            try! realm.write({
+                realm.add(message)
+            })
+            self.tableView.reloadData()
         } else {
             showAlertMessage(text: "Введите текст", title: "Ошибка")
         }
@@ -90,18 +99,6 @@ extension ChatVC : ServiceManagerDelegate {
             print("Connections: \(connectedDevices)")
         }
     }
-//
-//    func colorChanged(manager: ColorServiceManager, colorString: String) {
-//        OperationQueue.main.addOperation {
-//            switch colorString {
-//            case "red":
-//                self.change(color: .red)
-//            case "yellow":
-//                self.change(color: .yellow)
-//            default:
-//                NSLog("%@", "Unknown color value received: \(colorString)")
-//            }
-//        }
-//    }
+
     
 }

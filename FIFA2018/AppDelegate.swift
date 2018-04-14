@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Migration.applyMigration()
         UINavigationBar.appearance().tintColor = .red
+        UITabBar.appearance().tintColor = .red
         let kHelloMapAppID = "oVTdSxBIKfLg88l1bsCA"
         let kHelloMapAppCode = "Fh78hg4V-fIRjNNidH5unA"
         

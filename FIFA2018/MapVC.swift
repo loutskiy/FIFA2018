@@ -15,6 +15,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate {
     
     let locationManager = CLLocationManager()
 
+    @IBOutlet weak var goToHome: UIButton!
     @IBOutlet weak var mapView: NMAMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,8 @@ class MapVC: UIViewController, CLLocationManagerDelegate {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
+        
+        goToHome.layer.cornerRadius = 25
         
         mapView.useHighResolutionMap = true
         mapView.positionIndicator.isVisible = true
@@ -84,6 +87,10 @@ class MapVC: UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         //print("locations = \(locValue.latitude) \(locValue.longitude)")
+    }
+    @IBAction func goToMyLocationAction(_ sender: Any) {
+        let position = NMAPositioningManager.shared().currentPosition
+        mapView.set(geoCenter: (position?.coordinates)!, animation: .linear)
     }
     
     @IBAction func goToHomeAction(_ sender: Any) {
