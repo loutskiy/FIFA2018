@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import Alamofire
 import AVFoundation
 import CoreLocation
+import ObjectMapper
+//import sReto
 
-class SOSVC: UIViewController, CLLocationManagerDelegate {
+class SOSVC: UIViewController, CLLocationManagerDelegate, SelectSectorVCDelegate {
     
     let locationManager = CLLocationManager()
     let cameraController = CameraController()
@@ -18,11 +21,25 @@ class SOSVC: UIViewController, CLLocationManagerDelegate {
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var capturePhotoOutput: AVCapturePhotoOutput?
     var qrCodeFrameView: UIView?
+    var timer: Timer!
+    
     @IBOutlet weak var sectorName: UILabel!
     
     @IBOutlet weak var cameraPreviewView: UIView!
     
     @IBAction func takePhoto(_ sender: Any) {
+        guard let capturePhotoOutput = self.capturePhotoOutput else { return }
+        
+        // Get an instance of AVCapturePhotoSettings class
+        let photoSettings = AVCapturePhotoSettings()
+        
+        // Set photo settings for our need
+        photoSettings.isAutoStillImageStabilizationEnabled = true
+        photoSettings.isHighResolutionPhotoEnabled = false
+        photoSettings.flashMode = .auto
+        
+        // Call capturePhoto method by passing our photo settings and a delegate implementing AVCapturePhotoCaptureDelegate
+        capturePhotoOutput.capturePhoto(with: photoSettings, delegate: self)
         
     }
     
@@ -39,15 +56,9 @@ class SOSVC: UIViewController, CLLocationManagerDelegate {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
-                
-//        cameraController.prepare {(error) in
-//            if let error = error {
-//                print(error)
-//            }
-//
-//            try? self.cameraController.displayPreview(on: self.cameraPreviewView)
-//        }
-//
+        
+        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
+
         guard let captureDevice = AVCaptureDevice.default(for: AVMediaType.video) else {
             fatalError("No vidoe device found")
         }
@@ -64,7 +75,7 @@ class SOSVC: UIViewController, CLLocationManagerDelegate {
             
             // Get an instance of ACCapturePhotoOutput class
             capturePhotoOutput = AVCapturePhotoOutput()
-            capturePhotoOutput?.isHighResolutionCaptureEnabled = true
+            capturePhotoOutput?.isHighResolutionCaptureEnabled = false
             
             // Set the output on the capture session
             captureSession?.addOutput(capturePhotoOutput!)
@@ -72,6 +83,10 @@ class SOSVC: UIViewController, CLLocationManagerDelegate {
             // Initialize a AVCaptureMetadataOutput object and set it as the input device
             let captureMetadataOutput = AVCaptureMetadataOutput()
             captureSession?.addOutput(captureMetadataOutput)
+            
+            if (captureSession?.canSetSessionPreset(.vga640x480))! {
+                captureSession?.sessionPreset = .vga640x480
+            }
             
             // Set delegate and use the default dispatch queue to execute the call back
             captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
@@ -117,7 +132,33 @@ class SOSVC: UIViewController, CLLocationManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    func didFinishWithSelectedSector(geo: GeoLocation) {
+        timer.invalidate()
+        self.sectorName.text = "\(geo.SectorName) - \(geo.SectorNumber)"
+    }
+    
+    @objc func runTimedCode () {
+        print("run")
+        let params: Parameters = ["latitude": locationManager.location?.coordinate.latitude ?? 0, "longitude": locationManager.location?.coordinate.longitude ?? 0]
+        Alamofire.request(URL(string:"https://fifa.bigbadbird.ru/api/getSectorByCoordinates")!, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                print(params)
+                if let JSON = response.result.value as? [String:AnyObject] {
+                    let data = Mapper<GeoLocation>().map(JSONObject: JSON["result"])
+                    self.sectorName.text = "\(data?.SectorName ?? "") - \(data?.SectorNumber ?? "")"
+                }
+            case .failure(let error):
+                print("Error \(error)")
+                //fail(error as NSError)
+            }
+        }
+    }
+    
     @IBAction func changeSectorAction(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SelectSectorVC") as! SelectSectorVC
+        vc.delegate = self
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -149,6 +190,16 @@ extension SOSVC : AVCapturePhotoCaptureDelegate {
         let capturedImage = UIImage.init(data: imageData , scale: 1.0)
         if let image = capturedImage {
             // Save our captured image to photos album
+            let imageData:Data = UIImagePNGRepresentation(image)!
+            let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
+            
+            let params: Parameters = ["latitude": locationManager.location?.coordinate.latitude ?? 0, "longitude": locationManager.location?.coordinate.longitude ?? 0, "image": strBase64]
+            //print(params)
+            
+            Alamofire.request(URL(string:"https://fifa.bigbadbird.ru/api/sendWarning")!, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { (response) in
+
+            }
+            
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         }
     }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		74A2812DC688F698299E1D4E /* Pods_FIFA2018.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D68598C6D383D651AD9AF8D /* Pods_FIFA2018.framework */; };
+		A75E452020820971006D1E89 /* Recheability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E451F20820971006D1E89 /* Recheability.swift */; };
 		A7D02203208134B0007BE872 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D02202208134B0007BE872 /* AppDelegate.swift */; };
 		A7D02205208134B0007BE872 /* SOSVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D02204208134B0007BE872 /* SOSVC.swift */; };
 		A7D02208208134B0007BE872 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7D02206208134B0007BE872 /* Main.storyboard */; };
@@ -18,11 +19,13 @@
 		A7D0221A20813D93007BE872 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D0221920813D93007BE872 /* MapVC.swift */; };
 		A7D0221C20814337007BE872 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D0221B20814337007BE872 /* CameraController.swift */; };
 		A7E88BA72081DB240044A24B /* GeoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E88BA62081DB240044A24B /* GeoLocation.swift */; };
+		A7E88BAA2081EA1B0044A24B /* SelectSectorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E88BA92081EA1B0044A24B /* SelectSectorVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1D7CB7DE71562436D0B2874A /* Pods-FIFA2018.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FIFA2018.release.xcconfig"; path = "Pods/Target Support Files/Pods-FIFA2018/Pods-FIFA2018.release.xcconfig"; sourceTree = "<group>"; };
 		7D68598C6D383D651AD9AF8D /* Pods_FIFA2018.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FIFA2018.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A75E451F20820971006D1E89 /* Recheability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recheability.swift; sourceTree = "<group>"; };
 		A7D021FF208134B0007BE872 /* FIFA2018.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FIFA2018.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7D02202208134B0007BE872 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A7D02204208134B0007BE872 /* SOSVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOSVC.swift; sourceTree = "<group>"; };
@@ -35,6 +38,8 @@
 		A7D0221920813D93007BE872 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		A7D0221B20814337007BE872 /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		A7E88BA62081DB240044A24B /* GeoLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoLocation.swift; sourceTree = "<group>"; };
+		A7E88BA82081E8AE0044A24B /* sector_c.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = sector_c.gpx; sourceTree = "<group>"; };
+		A7E88BA92081EA1B0044A24B /* SelectSectorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSectorVC.swift; sourceTree = "<group>"; };
 		F3344D2783033ABF5B37F23E /* Pods-FIFA2018.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FIFA2018.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FIFA2018/Pods-FIFA2018.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +89,9 @@
 			children = (
 				A7D02202208134B0007BE872 /* AppDelegate.swift */,
 				A7D02204208134B0007BE872 /* SOSVC.swift */,
+				A7E88BA92081EA1B0044A24B /* SelectSectorVC.swift */,
+				A75E451F20820971006D1E89 /* Recheability.swift */,
+				A7E88BA82081E8AE0044A24B /* sector_c.gpx */,
 				A7D0221920813D93007BE872 /* MapVC.swift */,
 				A7D0221B20814337007BE872 /* CameraController.swift */,
 				A7E88BA62081DB240044A24B /* GeoLocation.swift */,
@@ -242,6 +250,8 @@
 			files = (
 				A7D02205208134B0007BE872 /* SOSVC.swift in Sources */,
 				A7E88BA72081DB240044A24B /* GeoLocation.swift in Sources */,
+				A75E452020820971006D1E89 /* Recheability.swift in Sources */,
+				A7E88BAA2081EA1B0044A24B /* SelectSectorVC.swift in Sources */,
 				A7D0221A20813D93007BE872 /* MapVC.swift in Sources */,
 				A7D0221C20814337007BE872 /* CameraController.swift in Sources */,
 				A7D02203208134B0007BE872 /* AppDelegate.swift in Sources */,
