@@ -49,10 +49,16 @@ class MapVC: UIViewController, CLLocationManagerDelegate {
 //                    print(response.result.value)
                     let data = Mapper<GeoLocation>().mapArray(JSONObject: JSON["result"])
                     for geo in data! {
-                        let marker = NMAMapMarker.init(geoCoordinates: NMAGeoCoordinates.init(latitude: geo.Latitude, longitude: geo.Longitude))
-                            marker.title = "te"
-                            marker.icon = #imageLiteral(resourceName: "Pin")
-                            self.mapView.add(marker)
+//                        let marker = NMAMapMarker.init(geoCoordinates: NMAGeoCoordinates.init(latitude: geo.Latitude, longitude: geo.Longitude))
+//                        marker.title = "te"
+//                        marker.icon = #imageLiteral(resourceName: "Pin")
+//                        self.mapView.add(marker)
+                        
+                        let circle = NMAMapCircle.init(coordinates: NMAGeoCoordinates.init(latitude: geo.Latitude, longitude: geo.Longitude), radius: 20)
+                        
+                        circle.fillColor = .red
+                        self.mapView.add(circle)
+                        
                     }
                 }
             case .failure(let error):
@@ -77,7 +83,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        //print("locations = \(locValue.latitude) \(locValue.longitude)")
     }
     
     @IBAction func goToHomeAction(_ sender: Any) {

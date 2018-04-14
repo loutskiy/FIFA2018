@@ -143,7 +143,7 @@ class SOSVC: UIViewController, CLLocationManagerDelegate, SelectSectorVCDelegate
         Alamofire.request(URL(string:"https://fifa.bigbadbird.ru/api/getSectorByCoordinates")!, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { (response) in
             switch response.result {
             case .success:
-                print(params)
+                //print(params)
                 if let JSON = response.result.value as? [String:AnyObject] {
                     let data = Mapper<GeoLocation>().map(JSONObject: JSON["result"])
                     self.sectorName.text = "\(data?.SectorName ?? "") - \(data?.SectorNumber ?? "")"
@@ -163,7 +163,7 @@ class SOSVC: UIViewController, CLLocationManagerDelegate, SelectSectorVCDelegate
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        //print("locations = \(locValue.latitude) \(locValue.longitude)")
     }
 
 }

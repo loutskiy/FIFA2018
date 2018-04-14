@@ -18,6 +18,13 @@ class PickerVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
         collectionView.dataSource = self
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        UserCache.changeLoginState(true)
+        UserCache.setDate(Date())
+        UserCache.setCountryId(3)
+        dismiss(animated: true, completion: nil)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -15,6 +15,13 @@
 		A75E4528208225EA006D1E89 /* PickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E4527208225EA006D1E89 /* PickerVC.swift */; };
 		A75E452A2082262E006D1E89 /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E45292082262E006D1E89 /* CountryCell.swift */; };
 		A75E452C208226EF006D1E89 /* UserCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E452B208226EF006D1E89 /* UserCache.swift */; };
+		A75E452E20822ED7006D1E89 /* StatisticVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E452D20822ED7006D1E89 /* StatisticVC.swift */; };
+		A75E453020822F9E006D1E89 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E452F20822F9E006D1E89 /* ChatVC.swift */; };
+		A75E453220823591006D1E89 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E453120823591006D1E89 /* ChatCell.swift */; };
+		A75E453420823799006D1E89 /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E453320823799006D1E89 /* AlertMessage.swift */; };
+		A75E453620823E8F006D1E89 /* Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E453520823E8E006D1E89 /* Migration.swift */; };
+		A75E4538208249B2006D1E89 /* MultipeerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E4537208249B2006D1E89 /* MultipeerManager.swift */; };
+		A75E453A20824E5D006D1E89 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E453920824E5D006D1E89 /* MessageModel.swift */; };
 		A7D02203208134B0007BE872 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D02202208134B0007BE872 /* AppDelegate.swift */; };
 		A7D02205208134B0007BE872 /* SOSVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D02204208134B0007BE872 /* SOSVC.swift */; };
 		A7D02208208134B0007BE872 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7D02206208134B0007BE872 /* Main.storyboard */; };
@@ -38,6 +45,13 @@
 		A75E4527208225EA006D1E89 /* PickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerVC.swift; sourceTree = "<group>"; };
 		A75E45292082262E006D1E89 /* CountryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
 		A75E452B208226EF006D1E89 /* UserCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCache.swift; sourceTree = "<group>"; };
+		A75E452D20822ED7006D1E89 /* StatisticVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticVC.swift; sourceTree = "<group>"; };
+		A75E452F20822F9E006D1E89 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
+		A75E453120823591006D1E89 /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
+		A75E453320823799006D1E89 /* AlertMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
+		A75E453520823E8E006D1E89 /* Migration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Migration.swift; sourceTree = "<group>"; };
+		A75E4537208249B2006D1E89 /* MultipeerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerManager.swift; sourceTree = "<group>"; };
+		A75E453920824E5D006D1E89 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		A7D021FF208134B0007BE872 /* FIFA2018.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FIFA2018.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7D02202208134B0007BE872 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A7D02204208134B0007BE872 /* SOSVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOSVC.swift; sourceTree = "<group>"; };
@@ -113,7 +127,14 @@
 				A75E4527208225EA006D1E89 /* PickerVC.swift */,
 				A75E45292082262E006D1E89 /* CountryCell.swift */,
 				A75E452B208226EF006D1E89 /* UserCache.swift */,
+				A75E452F20822F9E006D1E89 /* ChatVC.swift */,
+				A75E453120823591006D1E89 /* ChatCell.swift */,
+				A75E452D20822ED7006D1E89 /* StatisticVC.swift */,
+				A75E4537208249B2006D1E89 /* MultipeerManager.swift */,
 				A7D02206208134B0007BE872 /* Main.storyboard */,
+				A75E453320823799006D1E89 /* AlertMessage.swift */,
+				A75E453520823E8E006D1E89 /* Migration.swift */,
+				A75E453920824E5D006D1E89 /* MessageModel.swift */,
 				A7D02209208134B0007BE872 /* Assets.xcassets */,
 				A7D0220B208134B0007BE872 /* LaunchScreen.storyboard */,
 				A7D0220E208134B0007BE872 /* Info.plist */,
@@ -268,13 +289,20 @@
 			files = (
 				A7D02205208134B0007BE872 /* SOSVC.swift in Sources */,
 				A7E88BA72081DB240044A24B /* GeoLocation.swift in Sources */,
+				A75E453420823799006D1E89 /* AlertMessage.swift in Sources */,
 				A75E452620822466006D1E89 /* LoadVC.swift in Sources */,
 				A75E452020820971006D1E89 /* Recheability.swift in Sources */,
 				A7E88BAA2081EA1B0044A24B /* SelectSectorVC.swift in Sources */,
 				A75E45242082183F006D1E89 /* LocalChatPeer.swift in Sources */,
 				A7D0221A20813D93007BE872 /* MapVC.swift in Sources */,
+				A75E453620823E8F006D1E89 /* Migration.swift in Sources */,
 				A7D0221C20814337007BE872 /* CameraController.swift in Sources */,
 				A75E452A2082262E006D1E89 /* CountryCell.swift in Sources */,
+				A75E4538208249B2006D1E89 /* MultipeerManager.swift in Sources */,
+				A75E453220823591006D1E89 /* ChatCell.swift in Sources */,
+				A75E453020822F9E006D1E89 /* ChatVC.swift in Sources */,
+				A75E452E20822ED7006D1E89 /* StatisticVC.swift in Sources */,
+				A75E453A20824E5D006D1E89 /* MessageModel.swift in Sources */,
 				A75E4528208225EA006D1E89 /* PickerVC.swift in Sources */,
 				A75E45232082183F006D1E89 /* ChatRoom.swift in Sources */,
 				A7D02203208134B0007BE872 /* AppDelegate.swift in Sources */,

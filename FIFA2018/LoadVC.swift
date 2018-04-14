@@ -19,7 +19,7 @@ class LoadVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         let date = Date().addingTimeInterval(60*60*24)
-        if UserCache.date() < date && UserCache.isLogin() {
+        if UserCache.isLogin() && UserCache.date() < date {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "tabBar")
             present(vc!, animated: true, completion: nil)
         } else {
