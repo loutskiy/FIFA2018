@@ -15,6 +15,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var messageTextField: UITextField!
     let multipeerService = MultipeerManager()
     var messages: Results<MessageModel>?
+    @IBOutlet weak var segmentControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     @IBAction func sendMessage(_ sender: Any) {
+        messageTextField.resignFirstResponder()
         if messageTextField.text != "" {
             multipeerService.send(message: messageTextField.text!)
         } else {
@@ -47,6 +49,20 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell.textChatLabel.text = messages![indexPath.row].message
         return cell
     }
+    @IBAction func segmentChange(_ sender: Any) {
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            messages = realm.objects(MessageModel.self)
+        case 1:
+            messages = realm.objects(MessageModel.self).filter("countryId = 1")
+        case 2:
+            messages = realm.objects(MessageModel.self).filter("countryId = 2")
+
+        default:
+            messages = realm.objects(MessageModel.self)
+        }
+        tableView.reloadData()
+    }
 }
 
 extension ChatVC : ServiceManagerDelegate {
@@ -57,6 +73,9 @@ extension ChatVC : ServiceManagerDelegate {
 //            let id = myvalue?.id ?? 0 + 1
 //            message.id = id
             message.message = messageString
+            message.time = Date()
+            message.countryId = UserCache.countryId()
+            //message.uuid = UserCache.uuid()
             try! realm.write({
                 realm.add(message)
             })

@@ -99,6 +99,19 @@ extension MultipeerManager : MCSessionDelegate {
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         NSLog("%@", "peer \(peerID) didChangeState: \(state)")
+//        OperationQueue.main.addOperation {
+//            let realmData = realm.objects(MessageModel.self)
+//        }
+        do {
+//            
+//                let realmData = realm.objects(MessageModel.self)
+//                let array = Array(realmData)
+//                let data = array.toJSONString()
+//                try self.session.send((data?.data(using: .utf16))!, toPeers: [peerID], with: .reliable)
+        }
+        catch let error {
+            NSLog("%@", "Error for sending: \(error)")
+        }
         self.delegate?.connectedDevicesChanged(manager: self, connectedDevices:
             session.connectedPeers.map{$0.displayName})
     }

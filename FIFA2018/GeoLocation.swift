@@ -11,6 +11,7 @@ import RealmSwift
 import ObjectMapper
 
 class GeoLocation: Object, Mappable {
+    @objc dynamic var ID = 0
     @objc dynamic var Latitude = 0.0
     @objc dynamic var Longitude = 0.0
     @objc dynamic var SectorName = ""
@@ -20,7 +21,12 @@ class GeoLocation: Object, Mappable {
         self.init()
     }
     
+    override static func primaryKey() -> String? {
+        return "ID"
+    }
+    
     func mapping(map: Map) {
+        ID <- map["ID"]
         Latitude <- map["Latitude"]
         Longitude <- map["Longitude"]
         SectorName <- map["SectorName"]

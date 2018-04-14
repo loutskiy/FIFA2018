@@ -9,7 +9,7 @@ import RealmSwift
 
 struct DATABASE_INFO {
     private struct INFO {
-        static let version = 2
+        static let version = 3
     }
     static var Ver: UInt64 {
         return UInt64(INFO.version)

@@ -24,6 +24,10 @@ class UserCache: NSObject {
         return UserDefaults.standard.object(forKey: "date") as! Date
     }
     
+    static func uuid () -> String {
+        return UserDefaults.standard.string(forKey: "uuid")!
+    }
+    
     /// Func for change login state
     ///
     /// - Parameter loginState: isLogin
@@ -37,5 +41,9 @@ class UserCache: NSObject {
     
     static func setDate (_ date: Date) {
         UserDefaults.standard.set(date, forKey: "date")
+    }
+    
+    static func setUUID (_ uuid: String) {
+        UserDefaults.standard.set(uuid, forKey: "uuid")
     }
 }

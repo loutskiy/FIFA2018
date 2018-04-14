@@ -197,10 +197,10 @@ extension SOSVC : AVCapturePhotoCaptureDelegate {
             //print(params)
             
             Alamofire.request(URL(string:"https://fifa.bigbadbird.ru/api/sendWarning")!, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { (response) in
-
+                print(response.result.value)
             }
             
-            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            //UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         }
     }
 }

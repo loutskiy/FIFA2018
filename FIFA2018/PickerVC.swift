@@ -23,6 +23,8 @@ class PickerVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
         UserCache.changeLoginState(true)
         UserCache.setDate(Date())
         UserCache.setCountryId(3)
+        let uuid = UUID.init().uuidString
+        UserCache.setUUID(uuid)
         dismiss(animated: true, completion: nil)
     }
 
