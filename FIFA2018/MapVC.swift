@@ -30,10 +30,16 @@ class MapVC: UIViewController, CLLocationManagerDelegate {
         }
         
         mapView.useHighResolutionMap = true
+        mapView.positionIndicator.isVisible = true
         mapView.zoomLevel = 13.2
         mapView.set(geoCenter: NMAGeoCoordinates(latitude: 55.716542, longitude: 37.553947), animation: .linear)
         mapView.copyrightLogoPosition = NMALayoutPosition.bottomCenter
         
+        if NMAPositioningManager.shared().startPositioning() {
+            NotificationCenter.default.addObserver(self, selector: #selector(positionDidUpdate), name: .NMAPositioningManagerDidUpdatePosition, object: NMAPositioningManager.shared())
+            
+        }
+
         Alamofire.request(URL(string:"https://fifa.bigbadbird.ru/api/getAllPoints")!, method: .post).responseJSON { (response) in
             switch response.result {
             case .success:
@@ -58,6 +64,12 @@ class MapVC: UIViewController, CLLocationManagerDelegate {
         // Do any additional setup after loading the view.
     }
 
+    @objc func positionDidUpdate () {
+        let position = NMAPositioningManager.shared().currentPosition
+        mapView.set(geoCenter: (position?.coordinates)!, animation: .linear)
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
