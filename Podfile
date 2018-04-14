@@ -14,4 +14,6 @@ pod 'Alamofire', '~> 4.5'
     pod 'AlamofireObjectMapper'
     pod 'MBProgressHUD', '~> 1.0.0'
 pod "ObjectMapper+Realm"
+pod 'sReto'
+pod 'sReto/AllModules'
 end

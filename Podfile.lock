@@ -3,6 +3,7 @@ PODS:
   - AlamofireObjectMapper (5.0.0):
     - Alamofire (~> 4.1)
     - ObjectMapper (~> 3.0)
+  - CocoaAsyncSocket (7.6.2)
   - HEREMapsStarter (3.7.0)
   - MBProgressHUD (1.0.0)
   - ObjectMapper (3.1.0)
@@ -17,6 +18,26 @@ PODS:
   - SDWebImage (4.3.3):
     - SDWebImage/Core (= 4.3.3)
   - SDWebImage/Core (4.3.3)
+  - SocketRocket (0.5.1)
+  - sReto (3.0.0):
+    - sReto/WlanModule (= 3.0.0)
+  - sReto/AllModules (3.0.0):
+    - sReto/BluetoothModule
+    - sReto/RemoteModule
+    - sReto/WlanModule
+  - sReto/BluetoothModule (3.0.0):
+    - sReto/Bonjour
+    - sReto/no-arc
+  - sReto/Bonjour (3.0.0):
+    - CocoaAsyncSocket (= 7.6.2)
+    - sReto/Core
+  - sReto/Core (3.0.0)
+  - sReto/no-arc (3.0.0)
+  - sReto/RemoteModule (3.0.0):
+    - SocketRocket (= 0.5.1)
+    - sReto/Core
+  - sReto/WlanModule (3.0.0):
+    - sReto/Bonjour
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
@@ -27,11 +48,14 @@ DEPENDENCIES:
   - "ObjectMapper+Realm"
   - RealmSwift
   - SDWebImage (~> 4.0)
+  - sReto
+  - sReto/AllModules
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - AlamofireObjectMapper
+    - CocoaAsyncSocket
     - HEREMapsStarter
     - MBProgressHUD
     - ObjectMapper
@@ -39,10 +63,13 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - SDWebImage
+    - SocketRocket
+    - sReto
 
 SPEC CHECKSUMS:
   Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
   AlamofireObjectMapper: 5fafc816351cbbc0d486611aaeba7461c0cbad49
+  CocoaAsyncSocket: 3541e024f48c54b251638ef72d51dd42808de932
   HEREMapsStarter: c965bb891705b2407d7b140dfbfc2fc4c72acea3
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   ObjectMapper: 20505058f54e5c3ca69e1d6de9897d152a5369a6
@@ -50,7 +77,9 @@ SPEC CHECKSUMS:
   Realm: d927fbf66df5532cfafc08afb5f7e53ded37b894
   RealmSwift: 4e903a494e05d866581d69ad6f7e7b879d446baf
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
+  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
+  sReto: 34d5292fdeab50cfc7d4e64c79f025501b57f970
 
-PODFILE CHECKSUM: 21e738f84a92335e1e7194554a6038479320fee0
+PODFILE CHECKSUM: a5b4c1eefdfc2f6f7470b4398c6b50db86f95208
 
 COCOAPODS: 1.5.0
