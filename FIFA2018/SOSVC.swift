@@ -18,7 +18,8 @@ class SOSVC: UIViewController, CLLocationManagerDelegate {
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var capturePhotoOutput: AVCapturePhotoOutput?
     var qrCodeFrameView: UIView?
-
+    @IBOutlet weak var sectorName: UILabel!
+    
     @IBOutlet weak var cameraPreviewView: UIView!
     
     @IBAction func takePhoto(_ sender: Any) {
@@ -115,7 +116,10 @@ class SOSVC: UIViewController, CLLocationManagerDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    @IBAction func changeSectorAction(_ sender: Any) {
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         print("locations = \(locValue.latitude) \(locValue.longitude)")

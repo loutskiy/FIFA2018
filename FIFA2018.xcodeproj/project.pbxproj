@@ -17,7 +17,7 @@
 		A7D0221820813D27007BE872 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D0221720813D27007BE872 /* CoreLocation.framework */; };
 		A7D0221A20813D93007BE872 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D0221920813D93007BE872 /* MapVC.swift */; };
 		A7D0221C20814337007BE872 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D0221B20814337007BE872 /* CameraController.swift */; };
-		A7E88BA72081DB240044A24B /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E88BA62081DB240044A24B /* Subject.swift */; };
+		A7E88BA72081DB240044A24B /* GeoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E88BA62081DB240044A24B /* GeoLocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +34,7 @@
 		A7D0221720813D27007BE872 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A7D0221920813D93007BE872 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		A7D0221B20814337007BE872 /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
-		A7E88BA62081DB240044A24B /* Subject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
+		A7E88BA62081DB240044A24B /* GeoLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoLocation.swift; sourceTree = "<group>"; };
 		F3344D2783033ABF5B37F23E /* Pods-FIFA2018.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FIFA2018.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FIFA2018/Pods-FIFA2018.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,7 +86,7 @@
 				A7D02204208134B0007BE872 /* SOSVC.swift */,
 				A7D0221920813D93007BE872 /* MapVC.swift */,
 				A7D0221B20814337007BE872 /* CameraController.swift */,
-				A7E88BA62081DB240044A24B /* Subject.swift */,
+				A7E88BA62081DB240044A24B /* GeoLocation.swift */,
 				A7D02206208134B0007BE872 /* Main.storyboard */,
 				A7D02209208134B0007BE872 /* Assets.xcassets */,
 				A7D0220B208134B0007BE872 /* LaunchScreen.storyboard */,
@@ -241,7 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7D02205208134B0007BE872 /* SOSVC.swift in Sources */,
-				A7E88BA72081DB240044A24B /* Subject.swift in Sources */,
+				A7E88BA72081DB240044A24B /* GeoLocation.swift in Sources */,
 				A7D0221A20813D93007BE872 /* MapVC.swift in Sources */,
 				A7D0221C20814337007BE872 /* CameraController.swift in Sources */,
 				A7D02203208134B0007BE872 /* AppDelegate.swift in Sources */,
