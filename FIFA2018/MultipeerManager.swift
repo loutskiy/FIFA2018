@@ -11,7 +11,8 @@ import MultipeerConnectivity
 
 protocol ServiceManagerDelegate {
     func connectedDevicesChanged(manager : MultipeerManager, connectedDevices: [String])
-    func messageReceived(manager : MultipeerManager, messageString: String)
+//    func messageReceived(manager : MultipeerManager, messageString: String)
+    func messageReceived(manager : MultipeerManager, messageString: String, countryId: Int)
 }
 
 class MultipeerManager : NSObject {
@@ -49,6 +50,23 @@ class MultipeerManager : NSObject {
         if session.connectedPeers.count > 0 {
             do {
                 try self.session.send(message.data(using: .utf8)!, toPeers: session.connectedPeers, with: .reliable)
+            }
+            catch let error {
+                NSLog("%@", "Error for sending: \(error)")
+            }
+        }
+        
+    }
+    
+    func sendNew(message : String, countryId:Int) {
+        NSLog("%@", "sendColor: \(message) to \(session.connectedPeers.count) peers")
+        
+        if session.connectedPeers.count > 0 {
+            do {
+                let array = ["message": String(message), "countryId":countryId] as [String : Any]
+                let arrayAsPLISTData = NSKeyedArchiver.archivedData(withRootObject: array)
+
+                try self.session.send(arrayAsPLISTData, toPeers: session.connectedPeers, with: .reliable)
             }
             catch let error {
                 NSLog("%@", "Error for sending: \(error)")
@@ -118,8 +136,17 @@ extension MultipeerManager : MCSessionDelegate {
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         NSLog("%@", "didReceiveData: \(data)")
-        let str = String(data: data, encoding: .utf8)!
-        self.delegate?.messageReceived(manager: self, messageString: str)
+        
+        if let newStrings: [String : Any] = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String : Any] {
+            
+            // ... do something
+            print(newStrings)
+            self.delegate?.messageReceived(manager: self, messageString: newStrings["message"]! as! String, countryId: newStrings["countryId"]! as! Int)
+            
+        }
+        
+//        let str = String(data: data, encoding: .utf8)!
+//        self.delegate?.messageReceived(manager: self, messageString: str)
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {

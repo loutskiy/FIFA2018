@@ -110,7 +110,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLo
     @IBAction func sendMessage(_ sender: Any) {
         messageTextField.resignFirstResponder()
         if messageTextField.text != "" {
-            multipeerService.send(message: messageTextField.text!)
+            multipeerService.sendNew(message: messageTextField.text!, countryId: UserCache.countryId())
             let message = MessageModel()
             message.message = "#\(messageTextField.text!)"
             message.time = Date()
@@ -151,7 +151,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLo
 }
 
 extension ChatVC : ServiceManagerDelegate {
-    func messageReceived(manager: MultipeerManager, messageString: String) {
+    func messageReceived(manager: MultipeerManager, messageString: String, countryId: Int) {
         OperationQueue.main.addOperation {
             let message = MessageModel()
 //            let myvalue = realm.objects(MessageModel.self).last
@@ -159,7 +159,7 @@ extension ChatVC : ServiceManagerDelegate {
 //            message.id = id
             message.message = "#\(messageString)"
             message.time = Date()
-            message.countryId = UserCache.countryId()
+            message.countryId = countryId
             //message.uuid = UserCache.uuid()
             try! realm.write({
                 realm.add(message)
