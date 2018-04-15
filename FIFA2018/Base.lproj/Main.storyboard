@@ -253,10 +253,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlM-by-MS1">
-                                <rect key="frame" x="16" y="192" width="62.5" height="51"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlM-by-MS1">
+                                <rect key="frame" x="16" y="192" width="100" height="51"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="51" id="Dit-SE-64D"/>
+                                    <constraint firstAttribute="width" constant="100" id="Ex0-Br-YoB"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="27"/>
                                 <color key="textColor" red="0.81467633930000005" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -281,10 +282,23 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dzZ-Pj-NOV">
-                                <rect key="frame" x="296.5" y="192" width="62.5" height="51"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Стадион" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bvk-8W-4aA">
+                                <rect key="frame" x="16" y="251" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lc2-nl-F8d">
+                                <rect key="frame" x="16" y="280" width="343" height="25.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dzZ-Pj-NOV">
+                                <rect key="frame" x="259" y="192" width="100" height="51"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="51" id="3AL-u6-mQZ"/>
+                                    <constraint firstAttribute="width" constant="100" id="eCW-dd-V1i"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="27"/>
                                 <color key="textColor" red="0.81467633930000005" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -296,9 +310,15 @@
                             <constraint firstItem="xZA-di-7Ql" firstAttribute="top" secondItem="jhW-sP-ZaA" secondAttribute="top" constant="20" id="2Wr-r2-ObE"/>
                             <constraint firstItem="jhW-sP-ZaA" firstAttribute="trailing" secondItem="dzZ-Pj-NOV" secondAttribute="trailing" constant="16" id="Br4-z2-7im"/>
                             <constraint firstItem="dlM-by-MS1" firstAttribute="leading" secondItem="jhW-sP-ZaA" secondAttribute="leading" constant="16" id="Loc-AK-Ram"/>
+                            <constraint firstItem="Bvk-8W-4aA" firstAttribute="leading" secondItem="jhW-sP-ZaA" secondAttribute="leading" constant="16" id="SLB-ZB-I9r"/>
                             <constraint firstItem="dzZ-Pj-NOV" firstAttribute="top" secondItem="N7P-3c-fYm" secondAttribute="bottom" constant="8" id="TlB-Lz-RRX"/>
                             <constraint firstItem="N7P-3c-fYm" firstAttribute="top" secondItem="jhW-sP-ZaA" secondAttribute="top" constant="20" id="VA3-S7-GLP"/>
                             <constraint firstItem="jhW-sP-ZaA" firstAttribute="trailing" secondItem="N7P-3c-fYm" secondAttribute="trailing" constant="16" id="YLs-p8-Tcg"/>
+                            <constraint firstItem="jhW-sP-ZaA" firstAttribute="trailing" secondItem="lc2-nl-F8d" secondAttribute="trailing" constant="16" id="d6u-Pd-jCc"/>
+                            <constraint firstItem="Bvk-8W-4aA" firstAttribute="top" secondItem="dlM-by-MS1" secondAttribute="bottom" constant="8" id="opB-PS-vHa"/>
+                            <constraint firstItem="lc2-nl-F8d" firstAttribute="leading" secondItem="jhW-sP-ZaA" secondAttribute="leading" constant="16" id="pI8-uq-hbN"/>
+                            <constraint firstItem="jhW-sP-ZaA" firstAttribute="trailing" secondItem="Bvk-8W-4aA" secondAttribute="trailing" constant="16" id="tMj-R4-AwD"/>
+                            <constraint firstItem="lc2-nl-F8d" firstAttribute="top" secondItem="Bvk-8W-4aA" secondAttribute="bottom" constant="8" id="uFx-ni-mWD"/>
                             <constraint firstItem="dlM-by-MS1" firstAttribute="top" secondItem="xZA-di-7Ql" secondAttribute="bottom" constant="8" id="udQ-Lo-c0o"/>
                             <constraint firstItem="xZA-di-7Ql" firstAttribute="leading" secondItem="jhW-sP-ZaA" secondAttribute="leading" constant="16" id="yOZ-8M-9pq"/>
                         </constraints>
@@ -306,8 +326,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Матч" id="sjW-ra-dKD"/>
                     <connections>
+                        <outlet property="countFirst" destination="dlM-by-MS1" id="IqB-aH-tgi"/>
+                        <outlet property="countSecond" destination="dzZ-Pj-NOV" id="cjZ-He-aMy"/>
                         <outlet property="flagFirst" destination="xZA-di-7Ql" id="8c9-fH-qn2"/>
                         <outlet property="flagSecond" destination="N7P-3c-fYm" id="F22-uG-8MZ"/>
+                        <outlet property="stadiumText" destination="lc2-nl-F8d" id="tT3-bv-afK"/>
                         <outlet property="textViewLabel" destination="dlM-by-MS1" id="Bhi-bc-imR"/>
                     </connections>
                 </viewController>
