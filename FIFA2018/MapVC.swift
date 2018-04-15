@@ -19,6 +19,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, NMARouteManagerDelegat
     @IBOutlet weak var goToHome: UIButton!
     @IBOutlet weak var mapView: NMAMapView!
     var clusters = [ClusterModel]()
+    var mapRoute: NMAMapRoute?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.locationManager.requestAlwaysAuthorization()
@@ -90,8 +91,10 @@ class MapVC: UIViewController, CLLocationManagerDelegate, NMARouteManagerDelegat
         //print("locations = \(locValue.latitude) \(locValue.longitude)")
     }
     @IBAction func goToMyLocationAction(_ sender: Any) {
-        let position = NMAPositioningManager.shared().currentPosition
-        mapView.set(geoCenter: (position?.coordinates)!, animation: .linear)
+        let geoCoord1 = NMAGeoCoordinates(latitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!)
+
+//        let position = NMAPositioningManager.shared().currentPosition
+        mapView.set(geoCenter: geoCoord1, animation: .linear)
     }
     
     @IBAction func goToHomeAction(_ sender: Any) {
@@ -101,12 +104,14 @@ class MapVC: UIViewController, CLLocationManagerDelegate, NMARouteManagerDelegat
             case .success:
                 if let JSON = response.result.value as? [String:AnyObject] {
                     let data = Mapper<MetroModel>().map(JSONObject: JSON["result"])
+                    print(data)
                     let routeManager = NMARouteManager.shared()
                     routeManager.delegate = self
                     var stops = [NMAGeoCoordinates]()
-                    let geoCoord1 = NMAPositioningManager.shared().currentPosition?.coordinates
+                    let geoCoord1 = NMAGeoCoordinates(latitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!)
+//                    let geoCoord1 = NMAPositioningManager.shared().currentPosition?.coordinates
                     let geoCoord2 = NMAGeoCoordinates(latitude: (data?.Latitude)!, longitude: (data?.Longitude)!)
-                    stops.append(geoCoord1!)
+                    stops.append(geoCoord1)
                     stops.append(geoCoord2)
                     print(stops)
                     let routingMode = NMARoutingMode.init(routingType: .fastest, transportMode: .pedestrian, routingOptions: 0)
@@ -136,10 +141,13 @@ class MapVC: UIViewController, CLLocationManagerDelegate, NMARouteManagerDelegat
         print(error.rawValue)
         //if error == nil && routes != nil && (routes?.count)! > 0 {
         OperationQueue.main.addOperation {
-            
+            if self.mapRoute != nil {
+                self.mapView.remove(self.mapRoute!)
+                self.mapRoute = nil
+            }
             let route = routes![0]
-            let mapRoute = NMAMapRoute.init(route: route)
-            self.mapView.add(mapRoute)
+            self.mapRoute = NMAMapRoute.init(route: route)
+            self.mapView.add(self.mapRoute!)
         }
 //        } else if error != nil {
 //

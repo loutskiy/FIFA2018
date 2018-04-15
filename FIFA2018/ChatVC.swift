@@ -11,6 +11,7 @@ import RealmSwift
 import ObjectMapper
 import Alamofire
 import CoreLocation
+import SDWebImage
 
 class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
@@ -116,9 +117,17 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLo
             message.time = Date()
             message.countryId = UserCache.countryId()
             //message.uuid = UserCache.uuid()
+            let search = realm.objects(MessageModel.self).filter("message = '#\(messageTextField.text!)' AND countryId = \(UserCache.countryId())")
+            print(search)
+            for find in search {
+                try! realm.write({
+                    realm.delete(find)
+                })
+            }
             try! realm.write({
                 realm.add(message)
             })
+            messageTextField.text = ""
             self.tableView.reloadData()
         } else {
             showAlertMessage(text: "Введите текст", title: "Ошибка")
@@ -132,6 +141,11 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ChatCell
         cell.textChatLabel.text = messages![indexPath.row].message
+        for match in matches! {
+            if match.ID == messages![indexPath.row].countryId {
+                cell.flagImage.sd_setImage(with: URL(string:match.Path))
+            }
+        }
         return cell
     }
     @IBAction func segmentChange(_ sender: Any) {
@@ -161,6 +175,13 @@ extension ChatVC : ServiceManagerDelegate {
             message.time = Date()
             message.countryId = countryId
             //message.uuid = UserCache.uuid()
+            let search = realm.objects(MessageModel.self).filter("message = '#\(messageString)' AND countryId = \(countryId)")
+            print(search)
+            for find in search {
+                try! realm.write({
+                    realm.delete(find)
+                })
+            }
             try! realm.write({
                 realm.add(message)
             })

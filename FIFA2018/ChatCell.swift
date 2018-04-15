@@ -10,9 +10,12 @@ import UIKit
 
 class ChatCell: UITableViewCell {
 
+    @IBOutlet weak var flagImage: UIImageView!
     @IBOutlet weak var textChatLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
+        flagImage.layer.cornerRadius = 19
+        flagImage.layer.masksToBounds = true
         // Initialization code
     }
 
