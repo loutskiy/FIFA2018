@@ -11,6 +11,7 @@ import Alamofire
 import AVFoundation
 import CoreLocation
 import ObjectMapper
+import MBProgressHUD
 //import sReto
 
 class SOSVC: UIViewController, CLLocationManagerDelegate, SelectSectorVCDelegate {
@@ -30,6 +31,7 @@ class SOSVC: UIViewController, CLLocationManagerDelegate, SelectSectorVCDelegate
     @IBOutlet weak var sosButton: UIButton!
     
     @IBAction func takePhoto(_ sender: Any) {
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         guard let capturePhotoOutput = self.capturePhotoOutput else { return }
         
         // Get an instance of AVCapturePhotoSettings class
@@ -203,6 +205,8 @@ extension SOSVC : AVCapturePhotoCaptureDelegate {
             //print(params)
             
             Alamofire.request(URL(string:"https://fifa.bigbadbird.ru/api/sendWarning")!, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { (response) in
+                MBProgressHUD.hide(for: self.view, animated: true)
+                self.showAlertMessage(text: "Служба безопасности оповещена", title: "Сообщение передано")
                 print(response.result.value)
             }
             
