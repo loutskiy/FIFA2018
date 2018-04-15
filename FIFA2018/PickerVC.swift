@@ -19,6 +19,7 @@ class PickerVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
     @IBOutlet weak var collectionView: UICollectionView!
     
     var matches = [MatchModel]()
+    var showMatchNotFound = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,10 +56,30 @@ class PickerVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
                 if let JSON = response.result.value as? [String:AnyObject] {
                     let errorCode = JSON["errorCode"] as! Int
                     if errorCode == 0 {
+                        autoreleasepool {
+                            do {
+                                let data = Mapper<MatchModel>().mapArray(JSONObject: JSON["result"])
+                                for object in self.matches {
+                                    try! realm.write {
+                                        realm.delete(object)
+                                    }
+                                }
+                                try! realm.write {
+                                    for object in data! {
+                                        realm.add(object, update: true)
+                                    }
+                                }
+                            } catch let error as NSError {
+                                print(error)
+                            }
+                        }
                         self.matches = Mapper<MatchModel>().mapArray(JSONObject: JSON["result"])!
                         self.collectionView.reloadData()
                     } else {
-                        self.showAlertMessage(text: "Чемпионат не найдет", title: "Ошибка")
+                        if !self.showMatchNotFound {
+                            self.showAlertMessage(text: "Чемпионат не найдет", title: "Ошибка")
+                            self.showMatchNotFound = true
+                        }
                     }
                 }
             case .failure(let error):

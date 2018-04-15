@@ -10,6 +10,7 @@ PODS:
   - "ObjectMapper+Realm (0.5)":
     - ObjectMapper
     - RealmSwift
+  - OneSignal (2.8.2)
   - Realm (3.3.2):
     - Realm/Headers (= 3.3.2)
   - Realm/Headers (3.3.2)
@@ -46,6 +47,7 @@ DEPENDENCIES:
   - MBProgressHUD (~> 1.0.0)
   - ObjectMapper (~> 3.0)
   - "ObjectMapper+Realm"
+  - OneSignal (< 3.0, >= 2.6.2)
   - RealmSwift
   - SDWebImage (~> 4.0)
   - sReto
@@ -60,6 +62,7 @@ SPEC REPOS:
     - MBProgressHUD
     - ObjectMapper
     - "ObjectMapper+Realm"
+    - OneSignal
     - Realm
     - RealmSwift
     - SDWebImage
@@ -74,12 +77,13 @@ SPEC CHECKSUMS:
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   ObjectMapper: 20505058f54e5c3ca69e1d6de9897d152a5369a6
   "ObjectMapper+Realm": 3188789fb77c189c7a83cb625333a607eb61a08f
+  OneSignal: ab5c509192ca8390bdd3570a6261e6decf4c79c1
   Realm: d927fbf66df5532cfafc08afb5f7e53ded37b894
   RealmSwift: 4e903a494e05d866581d69ad6f7e7b879d446baf
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   sReto: 34d5292fdeab50cfc7d4e64c79f025501b57f970
 
-PODFILE CHECKSUM: a5b4c1eefdfc2f6f7470b4398c6b50db86f95208
+PODFILE CHECKSUM: c12cd32918ffcf2587bf3ab93c3270638f429cdf
 
 COCOAPODS: 1.5.0

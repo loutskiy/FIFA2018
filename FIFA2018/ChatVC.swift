@@ -21,13 +21,20 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLo
     var messages: Results<MessageModel>?
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var sentButton: UIButton!
-    var matches = [MatchModel]()
+    var matches: Results<MatchModel>?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         multipeerService.delegate = self
-        messages = realm.objects(MessageModel.self)
+        messages = realm.objects(MessageModel.self).sorted(byKeyPath: "time", ascending: false)
+        matches = realm.objects(MatchModel.self)
+        self.segmentControl.removeAllSegments()
+        self.segmentControl.insertSegment(withTitle: "Все", at: 0, animated: true)
+        self.segmentControl.insertSegment(withTitle: self.matches![0].Name, at: 1, animated: true)
+        self.segmentControl.insertSegment(withTitle: self.matches![1].Name, at: 2, animated: true)
+        self.segmentControl.selectedSegmentIndex = 0
         sentButton.layer.cornerRadius = 28.5
         self.locationManager.requestAlwaysAuthorization()
         
@@ -41,7 +48,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLo
             locationManager.startUpdatingLocation()
             loadData()
         }
-        loadData()
+//        loadData()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -60,11 +67,29 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLo
                 if let JSON = response.result.value as? [String:AnyObject] {
                     let errorCode = JSON["errorCode"] as! Int
                     if errorCode == 0 {
-                        self.matches = Mapper<MatchModel>().mapArray(JSONObject: JSON["result"])!
+                        autoreleasepool {
+                            do {
+                                let data = Mapper<MatchModel>().mapArray(JSONObject: JSON["result"])
+                                for object in self.matches! {
+                                    try! realm.write {
+                                        realm.delete(object)
+                                    }
+                                }
+                                try! realm.write {
+                                    for object in data! {
+                                        realm.add(object, update: true)
+                                    }
+                                }
+                            } catch let error as NSError {
+                                print(error)
+                            }
+                        }
+                        
+                        //self.matches = Mapper<MatchModel>().mapArray(JSONObject: JSON["result"])!
                         self.segmentControl.removeAllSegments()
                         self.segmentControl.insertSegment(withTitle: "Все", at: 0, animated: true)
-                        self.segmentControl.insertSegment(withTitle: self.matches[0].Name, at: 1, animated: true)
-                        self.segmentControl.insertSegment(withTitle: self.matches[1].Name, at: 2, animated: true)
+                        self.segmentControl.insertSegment(withTitle: self.matches![0].Name, at: 1, animated: true)
+                        self.segmentControl.insertSegment(withTitle: self.matches![1].Name, at: 2, animated: true)
                         self.segmentControl.selectedSegmentIndex = 0
                     } else {
                         self.showAlertMessage(text: "Чемпионат не найдет", title: "Ошибка")
@@ -87,7 +112,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLo
         if messageTextField.text != "" {
             multipeerService.send(message: messageTextField.text!)
             let message = MessageModel()
-            message.message = messageTextField.text!
+            message.message = "#\(messageTextField.text!)"
             message.time = Date()
             message.countryId = UserCache.countryId()
             //message.uuid = UserCache.uuid()
@@ -112,11 +137,11 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLo
     @IBAction func segmentChange(_ sender: Any) {
         switch segmentControl.selectedSegmentIndex {
         case 0:
-            messages = realm.objects(MessageModel.self)
+            messages = realm.objects(MessageModel.self).sorted(byKeyPath: "time", ascending: false)
         case 1:
-            messages = realm.objects(MessageModel.self).filter("countryId = 1")
+            messages = realm.objects(MessageModel.self).filter("countryId = \(self.matches![0].ID)").sorted(byKeyPath: "time", ascending: false)
         case 2:
-            messages = realm.objects(MessageModel.self).filter("countryId = 2")
+            messages = realm.objects(MessageModel.self).filter("countryId = \(self.matches![1].ID)").sorted(byKeyPath: "time", ascending: false)
 
         default:
             messages = realm.objects(MessageModel.self)
@@ -132,7 +157,7 @@ extension ChatVC : ServiceManagerDelegate {
 //            let myvalue = realm.objects(MessageModel.self).last
 //            let id = myvalue?.id ?? 0 + 1
 //            message.id = id
-            message.message = messageString
+            message.message = "#\(messageString)"
             message.time = Date()
             message.countryId = UserCache.countryId()
             //message.uuid = UserCache.uuid()

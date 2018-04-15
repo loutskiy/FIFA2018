@@ -7,14 +7,28 @@
 //
 
 import UIKit
+import RealmSwift
+import SDWebImage
 
 class StatisticVC: UIViewController {
 
-    @IBOutlet weak var flagImageView: UIImageView!
+    @IBOutlet weak var flagSecond: UIImageView!
+    @IBOutlet weak var flagFirst: UIImageView!
     @IBOutlet weak var textViewLabel: UILabel!
+    
+    var matches: Results<MatchModel>?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        matches = realm.objects(MatchModel.self)
+        flagFirst.sd_setImage(with: URL(string:matches![0].Path))
+        flagSecond.sd_setImage(with: URL(string:matches![1].Path))
 
+        flagSecond.layer.cornerRadius = 50
+        flagFirst.layer.cornerRadius = 50
+        flagSecond.layer.masksToBounds = true
+        flagFirst.layer.masksToBounds = true
+        
         // Do any additional setup after loading the view.
     }
 

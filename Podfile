@@ -15,5 +15,12 @@ pod 'Alamofire', '~> 4.5'
     pod 'MBProgressHUD', '~> 1.0.0'
 pod "ObjectMapper+Realm"
 pod 'sReto'
+  pod 'OneSignal', '>= 2.6.2', '< 3.0'
+
 pod 'sReto/AllModules'
+end
+target 'OneSignalNotificationServiceExtension' do
+	 use_frameworks!
+
+  pod 'OneSignal', '>= 2.6.2', '< 3.0'
 end
